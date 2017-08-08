@@ -26,6 +26,28 @@ Burning of a fraction of LCs with every in-game transaction provides for:
 
 <img src="https://static.tildacdn.com/tild6533-3865-4330-b533-383765613733/ico2_en.png">
 
+## Technical features
+
+All the contracts are made with [truffle](truffle.readthedocs.io) development environment.
+It is also used to test, compile and deploy smart contracts.
+
+For the purpose of security we use [zeppelin-solidity](https://github.com/OpenZeppelin/zeppelin-solidity/) library.
+
+Lord Coin is based on [ERC20](https://github.com/OpenZeppelin/zeppelin-solidity/blob/master/contracts/token/StandardToken.sol)
+Also all the math is done with [SafeMath](https://github.com/OpenZeppelin/zeppelin-solidity/blob/master/contracts/math/SafeMath.sol)
+
 ## Schedule
 
 The pre-ICO starts on August 21, 2017 06:00 GMT+0
+The main ICO round starts on October 23, 2017 06:00 GMT+0
+
+## Links
+
+[Lordmance II ICO](http://lordmancer2.io)
+[Bitcointalk](https://bitcointalk.org/index.php?topic=205)
+[GitHub](https://github.com/lm2-ico)
+[Twitter](https://twitter.com/LordmancerI)
+[Reddit](https://www.reddit.com/r/icocrypto/comments/6r44bk/new_ico_lordmancer_ii_the_first_mobile_mmo_rpg/)
+[Telegram](https://t.me/lm2ico)
+[Slack](https://join.slack.com/t/lordmancerico/shared_invite/MjIwNDE1NTI3ODA4LTE1MDE2NzY2NDEtNDYxYTA5NjIwNg)
+[Facebook](https://www.facebook.com/Lordmancer2/)
