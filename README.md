@@ -28,7 +28,7 @@ Burning of a fraction of LCs with every in-game transaction provides for:
 
 ## Technical features
 
-All the contracts are made with [truffle](https://truffle.readthedocs.io) development environment.
+All the contracts are made with [truffle](http://truffleframework.com/docs/) development environment.
 
 It is also used to test, compile and deploy smart contracts.
 
