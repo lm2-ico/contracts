@@ -47,7 +47,7 @@ The main ICO round starts on October 23, 2017 06:00 GMT+0
 ## Links
 
 * [Lordmance II ICO](http://lordmancer2.io)
-* [Bitcointalk](https://bitcointalk.org/index.php?topic=205)
+* [Bitcointalk](https://bitcointalk.org/index.php?topic=2059852)
 * [GitHub](https://github.com/lm2-ico)
 * [Twitter](https://twitter.com/LordmancerI)
 * [Reddit](https://www.reddit.com/r/icocrypto/comments/6r44bk/new_ico_lordmancer_ii_the_first_mobile_mmo_rpg/)
