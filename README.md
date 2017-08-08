@@ -41,6 +41,7 @@ Also all the math is done with [SafeMath](https://github.com/OpenZeppelin/zeppel
 ## Schedule
 
 The pre-ICO starts on August 21, 2017 06:00 GMT+0
+
 The main ICO round starts on October 23, 2017 06:00 GMT+0
 
 ## Links
