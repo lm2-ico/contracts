@@ -10,7 +10,7 @@ contract LM2Wallet is Ownable {
   LordCoin public LC;
   address activeGames;
 
-  event LCsRecievedForGameAccount(uint128 uuid, uint256 value);
+  event LCsRecievedForGameAccount(address indexed from, uint128 uuid, uint256 value);
 
   function LM2Wallet(address _lcAddr, address _agAddr) {
     LC = LordCoin(_lcAddr);
@@ -39,10 +39,10 @@ contract LM2Wallet is Ownable {
     }
   }
 
-  function transferToGameAccount(uint128 _uuid, uint256 _value) {
-    require(LC.allowance(msg.sender, this) >= _value);
-    if (LC.transferFrom(msg.sender, this, _value)) {
-      LCsRecievedForGameAccount(_uuid, _value);
+  function transferToGameAccount(address _from, uint128 _uuid, uint256 _value) onlyOwner {
+    require(LC.allowance(_from, this) >= _value);
+    if (LC.transferFrom(_from, this, _value)) {
+      LCsRecievedForGameAccount(_from, _uuid, _value);
     }
   }
 }
