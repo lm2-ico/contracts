@@ -1,8 +1,9 @@
 pragma solidity ^0.4.11;
 
 import 'zeppelin-solidity/contracts/token/StandardToken.sol';
+import 'zeppelin-solidity/contracts/math/SafeMath.sol';
 
-contract LordCoin is StandardToken{
+contract LordCoin is StandardToken {
   using SafeMath for uint256;
 
   string public name = "Lord Coin";
