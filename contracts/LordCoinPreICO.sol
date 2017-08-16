@@ -70,7 +70,7 @@ contract LordCoinPreICO is Ownable {
 
         uint256 lcCount = _value.mul(priceLC).div(priceWEI);
 
-        require(LC.balanceOf(this) >= lcCount)
+        require(LC.balanceOf(this) >= lcCount);
 
         if (LC.balanceOf(_sender) == 0) investorCount++;
 
