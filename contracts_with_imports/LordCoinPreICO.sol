@@ -265,7 +265,7 @@ contract LordCoinPreICO is Ownable {
     }
 
     function withdraw() onlyOwner {
-        beneficiary.transfer(collected);
+        beneficiary.transfer(weiRaised);
         crowdsaleFinished = true;
     }
 
@@ -283,7 +283,7 @@ contract LordCoinPreICO is Ownable {
 
         weiRaised = weiRaised.add(_value);
 
-        NewContribution(_owner, lcCount, _value);
+        NewContribution(_sender, lcCount, _value);
 
         if (LC.balanceOf(this) == 0) {
             GoalReached(weiRaised);
