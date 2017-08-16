@@ -36,7 +36,7 @@ contract LordCoinPreICO is Ownable {
         _;
     }
 
-    function AhooleeTokenPreSale(
+    function LordCoinPreICO (
         address _lcAddr,
         address _beneficiary,
         uint256 _priceWEI,
