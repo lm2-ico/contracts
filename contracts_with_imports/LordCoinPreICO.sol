@@ -217,7 +217,7 @@ contract LordCoinPreICO is Ownable {
     LordCoin public LC;
     address public beneficiary;
 
-    uint256 public priceWEI;
+    uint256 public priceETH;
     uint256 public priceLC;
 
     uint256 public weiRaised = 0;
@@ -244,7 +244,7 @@ contract LordCoinPreICO is Ownable {
     function LordCoinPreICO (
         address _lcAddr,
         address _beneficiary,
-        uint256 _priceWEI,
+        uint256 _priceETH,
         uint256 _priceLC,
 
         uint _startTime,
@@ -252,7 +252,7 @@ contract LordCoinPreICO is Ownable {
     ) {
         LC = LordCoin(_lcAddr);
         beneficiary = _beneficiary;
-        priceWEI = _priceWEI;
+        priceETH = _priceETH;
         priceLC = _priceLC;
 
         startTime = _startTime;
@@ -273,7 +273,7 @@ contract LordCoinPreICO is Ownable {
         
         require(!crowdsaleFinished);
 
-        uint256 lcCount = _value.mul(priceLC).div(priceWEI);
+        uint256 lcCount = _value.mul(priceLC).div(priceETH).div(1 ether);
 
         require(LC.balanceOf(this) >= lcCount);
 
