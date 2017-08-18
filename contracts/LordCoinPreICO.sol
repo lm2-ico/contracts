@@ -59,11 +59,12 @@ contract LordCoinPreICO is Ownable {
         doPurchase(msg.sender, msg.value);
     }
 
-    function withdraw() onlyOwner {
-        beneficiary.transfer(weiRaised);
+    function withdraw(uint256 _value) onlyOwner {
+        beneficiary.transfer(_value);
     }
 
     function finishCrowdsale() onlyOwner {
+        LC.transfer(beneficiary, LC.balanceOf(this));
         crowdsaleFinished = true;
     }
 
