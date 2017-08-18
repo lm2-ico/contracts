@@ -266,6 +266,9 @@ contract LordCoinPreICO is Ownable {
 
     function withdraw() onlyOwner {
         beneficiary.transfer(weiRaised);
+    }
+
+    function finishCrowdsale() onlyOwner {
         crowdsaleFinished = true;
     }
 
@@ -273,7 +276,7 @@ contract LordCoinPreICO is Ownable {
         
         require(!crowdsaleFinished);
 
-        uint256 lcCount = _value.mul(priceLC).div(priceETH).div(1 ether);
+        uint256 lcCount = _value.mul(priceLC).div(priceETH);
 
         require(LC.balanceOf(this) >= lcCount);
 
