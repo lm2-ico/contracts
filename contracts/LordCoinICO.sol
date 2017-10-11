@@ -80,11 +80,11 @@ contract LordCoinICO is Ownable {
 
         uint256 lcCount = _value.mul(priceLC).div(priceETH);
 
-        if (now > time1 && now <= time2) {
+        if (now > time1 && now <= time2 && _value < 500 * 1 ether) {
             lcCount = lcCount.mul(100).div(110);
         }
 
-        if (now > time2) {
+        if (now > time2 && _value < 500 * 1 ether) {
             lcCount = lcCount.mul(100).div(125);
         }
 
