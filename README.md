@@ -38,11 +38,20 @@ Lord Coin is based on [ERC20](https://github.com/OpenZeppelin/zeppelin-solidity/
 
 Also all the math is done with [SafeMath](https://github.com/OpenZeppelin/zeppelin-solidity/blob/master/contracts/math/SafeMath.sol)
 
-## Schedule
+## ICO details
 
-The pre-ICO starts on August 21, 2017 06:00 GMT+0
+The pre-ICO started on August 21, 2017 06:00 GMT+0
+
+The team received $100000+ just for five days.
 
 The main ICO round starts on October 23, 2017 06:00 GMT+0
+
+A maximum of 13,000,000 LC will be sold during the main ICO, and the price will be scaled over the main ICO period:
+* $0.10 for the first period
+* $0.11 for the second period
+* $0.125 for the last period
+
+Moreover, everybody who pays 500 Ether or more will be given a price of $0.10 per LordCoin regardless the date of purchase.
 
 ## Links
 
