@@ -1,4 +1,4 @@
-pragma solidity ^0.4.11;
+pragma solidity ^0.4.17;
 
 /**
  * @title SafeMath
@@ -209,10 +209,56 @@ contract Ownable {
 
 }
 
-contract LordCoinICO is Ownable {
+/**
+ * @title Pausable
+ * @dev Base contract which allows children to implement an emergency stop mechanism.
+ */
+contract Pausable is Ownable {
+  event Pause();
+  event Unpause();
+
+  bool public paused = false;
+
+
+  /**
+   * @dev modifier to allow actions only when the contract IS paused
+   */
+  modifier whenNotPaused() {
+    require(!paused);
+    _;
+  }
+
+  /**
+   * @dev modifier to allow actions only when the contract IS NOT paused
+   */
+  modifier whenPaused {
+    require(paused);
+    _;
+  }
+
+  /**
+   * @dev called by the owner to pause, triggers stopped state
+   */
+  function pause() onlyOwner whenNotPaused returns (bool) {
+    paused = true;
+    Pause();
+    return true;
+  }
+
+  /**
+   * @dev called by the owner to unpause, returns to normal state
+   */
+  function unpause() onlyOwner whenPaused returns (bool) {
+    paused = false;
+    Unpause();
+    return true;
+  }
+}
+
+contract LordCoinICO is Pausable {
     using SafeMath for uint256;
 
-    string public name = "Lord Coin ICO";
+    string public constant name = "Lord Coin ICO";
 
     LordCoin public LC;
     address public beneficiary;
@@ -227,6 +273,13 @@ contract LordCoinICO is Ownable {
     uint public endTime;
     uint public time1;
     uint public time2;
+
+    uint public constant period2Numerator = 110;
+    uint public constant period2Denominator = 100;
+    uint public constant period3Numerator = 125;
+    uint public constant period3Denominator = 100; 
+
+    uint256 public constant premiumValue = 500 * 1 ether;
 
     bool public crowdsaleFinished = false;
 
@@ -265,43 +318,51 @@ contract LordCoinICO is Ownable {
         endTime = _startTime + _duration * 1 days;
     }
 
-    function () payable {
+    function () external payable whenNotPaused {
         require(msg.value >= 0.01 * 1 ether);
         doPurchase(msg.sender, msg.value);
     }
 
-    function withdraw(uint256 _value) onlyOwner {
+    function withdraw(uint256 _value) external onlyOwner {
         beneficiary.transfer(_value);
     }
 
-    function finishCrowdsale() onlyOwner {
+    function finishCrowdsale() external onlyOwner {
         LC.transfer(beneficiary, LC.balanceOf(this));
         crowdsaleFinished = true;
     }
 
-    function doPurchase(address _sender, uint256 _value) private onlyAfter(startTime) onlyBefore(endTime) {
+    function doPurchase(address _sender, uint256 _value) private internal onlyAfter(startTime) onlyBefore(endTime) {
         
         require(!crowdsaleFinished);
+        require(_address != address(0));
 
         uint256 lcCount = _value.mul(priceLC).div(priceETH);
 
-        if (now > time1 && now <= time2 && _value < 500 * 1 ether) {
-            lcCount = lcCount.mul(100).div(110);
+        if (now > time1 && now <= time2 && _value < premiumValue) {
+            lcCount = lcCount.mul(period2Denominator).div(period2Numerator);
         }
 
-        if (now > time2 && _value < 500 * 1 ether) {
-            lcCount = lcCount.mul(100).div(125);
+        if (now > time2 && _value < premiumValue) {
+            lcCount = lcCount.mul(period3Denominator).div(period3Numerator);
         }
 
-        require(LC.balanceOf(this) >= lcCount);
+        uint256 wei = _value;
+
+        if (LC.balanceOf(this) < lcCount) {
+          uint256 expectingLCCount = lcCount;
+          lcCount = LC.balanceOf(this);
+          wei = _value.mul(lcCount).div(expectingLCCount);
+          _sender.transfer(_value.sub(wei));
+        }
 
         if (LC.balanceOf(_sender) == 0) investorCount++;
 
         LC.transfer(_sender, lcCount);
 
-        weiRaised = weiRaised.add(_value);
+        weiRaised = weiRaised.add(wei);
 
-        NewContribution(_sender, lcCount, _value);
+        NewContribution(_sender, lcCount, wei);
 
         if (LC.balanceOf(this) == 0) {
             GoalReached(weiRaised);
