@@ -1,4 +1,4 @@
-pragma solidity ^0.4.17;
+pragma solidity 0.4.17;
 
 import './LordCoin.sol';
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
@@ -56,7 +56,7 @@ contract LordCoinICO is Pausable {
         uint _period1,
         uint _period2,
         uint _duration
-    ) {
+    ) public {
         LC = LordCoin(_lcAddr);
         beneficiary = _beneficiary;
         priceETH = _priceETH;
@@ -82,10 +82,10 @@ contract LordCoinICO is Pausable {
         crowdsaleFinished = true;
     }
 
-    function doPurchase(address _sender, uint256 _value) private internal onlyAfter(startTime) onlyBefore(endTime) {
+    function doPurchase(address _sender, uint256 _value) private onlyAfter(startTime) onlyBefore(endTime) {
         
         require(!crowdsaleFinished);
-        require(_address != address(0));
+        require(_sender != address(0));
 
         uint256 lcCount = _value.mul(priceLC).div(priceETH);
 
@@ -97,22 +97,22 @@ contract LordCoinICO is Pausable {
             lcCount = lcCount.mul(period3Denominator).div(period3Numerator);
         }
 
-        uint256 wei = _value;
+        uint256 _wei = _value;
 
         if (LC.balanceOf(this) < lcCount) {
           uint256 expectingLCCount = lcCount;
           lcCount = LC.balanceOf(this);
-          wei = _value.mul(lcCount).div(expectingLCCount);
-          _sender.transfer(_value.sub(wei));
+          _wei = _value.mul(lcCount).div(expectingLCCount);
+          _sender.transfer(_value.sub(_wei));
         }
 
         if (LC.balanceOf(_sender) == 0) investorCount++;
 
         LC.transfer(_sender, lcCount);
 
-        weiRaised = weiRaised.add(wei);
+        weiRaised = weiRaised.add(_wei);
 
-        NewContribution(_sender, lcCount, wei);
+        NewContribution(_sender, lcCount, _wei);
 
         if (LC.balanceOf(this) == 0) {
             GoalReached(weiRaised);
