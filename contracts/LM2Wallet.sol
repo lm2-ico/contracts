@@ -1,4 +1,4 @@
-pragma solidity 0.4.17;
+pragma solidity 0.4.15;
 
 import './LordCoin.sol';
 import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
@@ -21,7 +21,7 @@ contract LM2Wallet is Ownable {
     return lc.balanceOf(this);
   }
 
-  function playerToPlayer(uint256 _value) external public onlyOwner {
+  function playerToPlayer(uint256 _value) public onlyOwner {
     assert(inGameCoins() >= _value);
     uint256 fee = _value.div(5);
     uint256 toBurn = fee.div(2);
@@ -30,7 +30,7 @@ contract LM2Wallet is Ownable {
     lc.transfer(activeGames, fee - toBurn);
   }
 
-  function playerToGame(uint256 _value) external public  onlyOwner {
+  function playerToGame(uint256 _value) public  onlyOwner {
     assert(inGameCoins() >= _value);
     uint256 toBurnTokens = _value.mul(9).div(10);
     
@@ -39,7 +39,7 @@ contract LM2Wallet is Ownable {
     }
   }
 
-  function transferToGameAccount(address _from, uint128 _uuid, uint256 _value) external public  onlyOwner {
+  function transferToGameAccount(address _from, uint128 _uuid, uint256 _value) public  onlyOwner {
     require(lc.allowance(_from, this) >= _value);
     if (lc.transferFrom(_from, this, _value)) {
       LCsRecievedForGameAccount(_from, _uuid, _value);
