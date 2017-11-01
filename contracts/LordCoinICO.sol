@@ -109,7 +109,7 @@ contract LordCoinICO is Pausable {
         transferLCs(msg.sender, _wei, lcCount);
     }
 
-    function transferLCs(address _sender, uint256 _wei, uint256 _lcCount) internal {
+    function transferLCs(address _sender, uint256 _wei, uint256 _lcCount) private {
 
         if (LC.balanceOf(_sender) == 0) investorCount++;
 
