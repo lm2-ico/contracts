@@ -36,6 +36,7 @@ contract LordCoinLock is HasNoEther {
     function withdraw1(uint256 _value) external onlyOwner onlyAfter(endTime1) {
         require(_value <= tranche);
         LC.transfer(owner, _value);
+        tranche = tranche.sub(_value);
     }
 
     function withdraw2(uint256 _value) external onlyOwner onlyAfter(endTime2) {

@@ -19,6 +19,7 @@ contract LordCoinICO is Pausable {
     uint256 public weiRaised = 0;
     uint256 public investorCount = 0;
     uint256 public lcSold = 0;
+    uint256 public manualLCs = 0;
 
     uint public startTime;
     uint public endTime;
@@ -128,6 +129,7 @@ contract LordCoinICO is Pausable {
 
     function manualSell(address _sender, uint256 _value) external onlyOwner {
         transferLCs(_sender, 0, _value);
+        manualLCs = manualLCs.add(_value);
     }
 
 
