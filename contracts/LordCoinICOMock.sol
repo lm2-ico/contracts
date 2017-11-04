@@ -1,6 +1,5 @@
 pragma solidity 0.4.15;
 
-import './LordCoin.sol';
 import './LordCoinICO.sol';
 
 contract LordCoinICOMock is LordCoinICO {
