@@ -30,7 +30,7 @@ contract LordCoinLock is HasNoEther {
         endTime1 = _startTime + _duration * 1 days;
         endTime2 = _startTime + 2 * _duration * 1 days;
 
-        tranche = _tranche;
+        tranche = _tranche * 1e18;
     }
 
     function withdraw1(uint256 _value) external onlyOwner onlyAfter(endTime1) {
